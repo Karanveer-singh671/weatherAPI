@@ -22,7 +22,6 @@ if (!process.env.API_KEY) {
 if (!process.env.API_BASE_URL) {
 	throw new Error("API_BASE_URL must be defined");
 }
-app.listen(process.env.PORT || 5000, (error) => {
-	if (error) throw error;
+app.listen(process.env.PORT || 5000, () => {
 	console.log(`app is running on port ${process.env.PORT}`);
 });

@@ -1,9 +1,6 @@
 const app = require("./app");
 
 /** env checks */
-if (!process.env.DB_CLIENT) {
-	throw new Error("DB_CLIENT must be defined");
-}
 if (!process.env.DATABASE_URL) {
 	throw new Error("DATABASE_URL must be defined");
 }

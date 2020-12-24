@@ -3,7 +3,7 @@ require("dotenv").config();
 let db;
 if (process.env.NODE_ENV !== "production") {
 	db = knex({
-		client: process.env.DB_CLIENT,
+		client: "postgresql",
 		connection: {
 			host: process.env.DATABASE_URL,
 			user: process.env.DB_USER,
@@ -13,7 +13,7 @@ if (process.env.NODE_ENV !== "production") {
 	});
 } else {
 	db = knex({
-		client: "pg",
+		client: "postgresql",
 		connection: {
 			connectionString: process.env.DATABASE_URL,
 			ssl: true,

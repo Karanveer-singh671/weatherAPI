@@ -1,4 +1,5 @@
 const handleRegister = (req, res, db, bcrypt) => {
+	console.log(db);
 	const { email, name, password } = req.body;
 	/** does 1024 times over */
 	const saltRounds = 10;

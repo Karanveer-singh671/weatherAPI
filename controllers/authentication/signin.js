@@ -26,7 +26,6 @@ const signinAuthentication = (req, res, db, bcrypt) => {
 	}
 	payload = jwt.verify(authorization, process.env.JWT_SECRET);
 	if (payload instanceof jwt.JsonWebTokenError) {
-		// if the error thrown is because the JWT is unauthorized, return a 401 error
 		return res.status(401).end();
 	}
 	return res.json(authorization);

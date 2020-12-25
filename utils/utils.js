@@ -7,14 +7,12 @@ const signToken = (email) => {
 };
 
 const createSessions = (user) => {
-	/** JWT Token return user data */
 	const { email } = user;
 	const token = signToken(email);
-	/** if added new endpoints like profile page profile/:id then frontend can query using id for that profile */
-	/** would want to save this token in session storage for example on the frontend */
+	/** return user data */
 	return { success: "true", user, token };
 };
-
+/** filter an object's keys */
 const filterObject = async (givenObject, arr) => {
 	return Object.keys(givenObject)
 		.filter((key) => arr.includes(key))
@@ -23,7 +21,7 @@ const filterObject = async (givenObject, arr) => {
 			return obj;
 		}, {});
 };
-
+/** replace multiple spaces between words with single space */
 const filterSpaces = (str) => {
 	return str
 		.split(" ")

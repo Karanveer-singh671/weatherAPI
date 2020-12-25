@@ -1,6 +1,5 @@
 const { validationResult } = require("express-validator");
 
-// throw error if express-validations fail
 const validateRequest = (req, res, next) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {

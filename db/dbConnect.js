@@ -16,7 +16,6 @@ if (process.env.NODE_ENV !== "production") {
 		client: process.env.DB_CLIENT,
 		connection: {
 			connectionString: process.env.DATABASE_URL,
-			// ssl: true,
 		},
 	});
 }

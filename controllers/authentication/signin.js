@@ -1,12 +1,17 @@
+const utils = require("../../utils/utils");
+const jwt = require("jsonwebtoken");
 const handleSignin = (req, res, db, bcrypt) => {
 	const { email, password } = req.body;
-	return db.select("*")
+	return db
+		.select("*")
 		.from("users")
 		.where("email", "=", email)
 		.then((user) => {
-			const isValid = bcrypt.compareSync(password, user[0].hash);
-			if (isValid) {
-				return res.json(user[0]);
+			const currentUser = user[0];
+			const isValid = bcrypt.compareSync(password, currentUser.hash);
+			if (isValid && currentUser.id && currentUser.email) {
+				const session = utils.createSessions(currentUser);
+				session ? res.json(session) : res.json("Something went wrong");
 			} else {
 				res.status(400).json("wrong credentials");
 			}
@@ -14,4 +19,16 @@ const handleSignin = (req, res, db, bcrypt) => {
 		.catch((err) => res.status(400).json("wrong credentials"));
 };
 
-module.exports = { handleSignin };
+const signinAuthentication = (req, res, db, bcrypt) => {
+	const { authorization } = req.headers;
+	if (!authorization) {
+		return handleSignin(req, res, db, bcrypt);
+	}
+	payload = jwt.verify(authorization, process.env.JWT_SECRET);
+	if (payload instanceof jwt.JsonWebTokenError) {
+		// if the error thrown is because the JWT is unauthorized, return a 401 error
+		return res.status(401).end();
+	}
+	return res.json(authorization);
+};
+module.exports = { signinAuthentication };

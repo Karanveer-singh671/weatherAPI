@@ -17,11 +17,6 @@ app.use(getWeatherRouter);
 /** handle any route that doesn't match */
 app.use(notFoundRouter);
 
-/** test route */
-app.get("/", (req, res) => {
-	res.send("it is working");
-});
-
 if (process.env.NODE_ENV === "production") {
 	app.use(enforce.HTTPS({ trustProtoHeader: true }));
 }

@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken");
 const signToken = (email) => {
 	/** no sensitive information in here! */
 	const jwtPayload = { email };
-	/** hard to revoke this token -> would add redis sessions to store jwt for fast revoking if needed */
 	return jwt.sign(jwtPayload, process.env.JWT_SECRET, { expiresIn: "2h" });
 };
 

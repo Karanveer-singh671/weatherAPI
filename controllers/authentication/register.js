@@ -1,11 +1,11 @@
 const utils = require("../../utils/utils");
 const handleRegister = (req, res, db, bcrypt) => {
 	const { email, name, password } = req.body;
-	if (!email || !password) {
+	if (!email ||!name || !password) {
 		return res
 			.status(400)
 			.send(
-				"Please enter valid Email. Password must be between 4 and 20 characters"
+				"Fill Out all Fields."
 			);
 	}
 	const saltRounds = 10;
